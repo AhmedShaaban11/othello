@@ -4,7 +4,7 @@ from enums.difficulty import Difficulty
 
 
 class IndexView:
-    def __init__(self, canvas, width=600, height=600):
+    def __init__(self, canvas, width=900, height=600):
         self.width = width
         self.height = height
         self.canvas = canvas
@@ -17,17 +17,21 @@ class IndexView:
     def set_index_view(self):
         self.canvas.fill("#ffffff")
         self.set_heading("Othello")
-        btn1 = Button(self.canvas, 150, 250, 300, 75, "1 Player", "#ffffff", "#000000", lambda: (1, self.run_choose_difficulty()))
-        btn2 = Button(self.canvas, 150, 350, 300, 75, "2 Players", "#ffffff", "#000000", lambda: (2, None))
+        btn_width = 300
+        x = (self.width // 2) - (btn_width // 2)
+        btn1 = Button(self.canvas, x, 250, btn_width, 75, "1 Player", "#ffffff", "#000000", lambda: (1, self.run_choose_difficulty()))
+        btn2 = Button(self.canvas, x, 350, btn_width, 75, "2 Players", "#ffffff", "#000000", lambda: (2, None))
         pygame.display.flip()
         return [btn1, btn2]
 
     def set_difficulty_view(self):
         self.canvas.fill("#ffffff")
         self.set_heading("Choose Difficulty")
-        btn1 = Button(self.canvas, 150, 200, 300, 75, "Easy", "#ffffff", "#000000", lambda: Difficulty.EASY)
-        btn2 = Button(self.canvas, 150, 300, 300, 75, "Medium", "#ffffff", "#000000", lambda: Difficulty.MEDIUM)
-        btn3 = Button(self.canvas, 150, 400, 300, 75, "Hard", "#ffffff", "#000000", lambda: Difficulty.HARD)
+        btn_width = 300
+        x = (self.width // 2) - (btn_width // 2)
+        btn1 = Button(self.canvas, x, 200, btn_width, 75, "Easy", "#ffffff", "#000000", lambda: Difficulty.EASY)
+        btn2 = Button(self.canvas, x, 300, btn_width, 75, "Medium", "#ffffff", "#000000", lambda: Difficulty.MEDIUM)
+        btn3 = Button(self.canvas, x, 400, btn_width, 75, "Hard", "#ffffff", "#000000", lambda: Difficulty.HARD)
         pygame.display.flip()
         return [btn1, btn2, btn3]
 

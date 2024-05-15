@@ -8,8 +8,8 @@ from time import sleep
 
 
 class BotGame(Game):
-    def __init__(self, difficulty, canvas, screen_size=600):
-        super().__init__(canvas, screen_size)
+    def __init__(self, difficulty, canvas, width=900, height=600):
+        super().__init__(canvas, width, height)
         self.depth = difficulty.depth()
 
     def check_and_update_state(self):
@@ -28,6 +28,7 @@ class BotGame(Game):
         self.view.board = self.board
         self.turn.decrease_moves()
         self.turn = self.player1
+        self.view.draw()
 
     def alpha_beta_root(self, depth, alpha=-100, beta=100):
         max_val = -101

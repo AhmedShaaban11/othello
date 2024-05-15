@@ -66,6 +66,8 @@ class Board:
         return self.grey.keys()
 
     def get_disc(self, row, col):
+        if row < 0 or row >= 8 or col < 0 or col >= 8:
+            return Disc.EMPTY
         return self.grid[row][col]
 
     def is_full(self):

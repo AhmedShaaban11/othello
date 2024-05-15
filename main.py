@@ -6,21 +6,22 @@ from views.endview import EndView
 
 
 def main():
+    width = 900
+    height = 600
     pygame.init()
     pygame.display.set_caption("Othello")
-    canvas = pygame.display.set_mode((600, 600))
-    menu = IndexView(canvas)
+    canvas = pygame.display.set_mode((width, height))
+    menu = IndexView(canvas, width, height)
     mode, difficulty = menu.run()
     if mode == 0 or (mode == 1 and difficulty == 0):
         pygame.quit()
         exit()
     if mode == 1:
-        game = BotGame(difficulty, canvas)
+        game = BotGame(difficulty, canvas, width, height)
     else:
-        game = Game(canvas)
-    board_view = game.view
-    board_view.run()
-    end_view = EndView(len(game.board.black), len(game.board.white), canvas)
+        game = Game(canvas, width, height)
+    game.view.run()
+    end_view = EndView(len(game.board.black), len(game.board.white), canvas, width, height)
     end_view.run()
     pygame.quit()
 

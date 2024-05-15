@@ -1,5 +1,6 @@
 class Player:
-    def __init__(self, disc, moves=30):
+    def __init__(self, name, disc, moves=30):
+        self.name = name
         self.disc = disc
         self.moves = moves
 
@@ -8,3 +9,6 @@ class Player:
 
     def has_moves(self):
         return self.moves > 0
+
+    def get_name(self):
+        return self.name

@@ -2,7 +2,7 @@ import pygame
 
 
 class EndView:
-    def __init__(self, blacks_count, whites_count, canvas, width=600, height=600):
+    def __init__(self, blacks_count, whites_count, canvas, width=900, height=600):
         self.width = width
         self.height = height
         self.canvas = canvas
