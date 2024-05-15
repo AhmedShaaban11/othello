@@ -27,7 +27,7 @@ class BoardView:
         radius = self.tile_length / 2 - 5
         for row in range(8):
             for col in range(8):
-                disc = self.board.get(row, col)
+                disc = self.board.get_disc(row, col)
                 pygame.draw.circle(self.canvas, disc.color(), self.center(row, col), radius)
         pygame.display.update()
 
@@ -46,6 +46,6 @@ class BoardView:
                     x, y = event.pos
                     self.game.play(x, y)
                 else:
-                    is_end = self.game.update_state()
+                    is_end = self.game.check_and_update_state()
                     if is_end:
                         running = False

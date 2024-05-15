@@ -12,8 +12,8 @@ class BotGame(Game):
         super().__init__(canvas, screen_size)
         self.depth = difficulty.depth()
 
-    def update_state(self):
-        if super().update_state():
+    def check_and_update_state(self):
+        if super().check_and_update_state():
             return True
         if self.turn == self.player2:
             self.play_bot()
@@ -34,7 +34,7 @@ class BotGame(Game):
         best_board = None
         for x, y in self.board.grey.keys():
             board = deepcopy(self.board)
-            board.update(x, y, self.player2.disc)
+            board.apply_move(x, y, self.player2.disc)
             val = self.alpha_beta(board, depth - 1, alpha, beta, False)
             if max_val < val:
                 best_board = board
@@ -51,14 +51,14 @@ class BotGame(Game):
         for x, y in root_board.grey.keys():
             board = deepcopy(root_board)
             if is_max:
-                board.update(x, y, self.player2.disc)
+                board.apply_move(x, y, self.player2.disc)
                 val = self.alpha_beta(board, depth - 1, alpha, beta, not is_max)
                 ret_val = max(ret_val, val)
                 alpha = max(alpha, val)
                 if beta <= alpha:
                     return ret_val
             else:
-                board.update(x, y, self.player1.disc)
+                board.apply_move(x, y, self.player1.disc)
                 val = self.alpha_beta(board, depth - 1, alpha, beta, not is_max)
                 ret_val = min(ret_val, val)
                 beta = min(beta, val)

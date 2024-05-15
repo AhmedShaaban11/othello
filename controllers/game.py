@@ -11,21 +11,21 @@ class Game:
         self.turn = self.player1
         self.view = BoardView(self.board, self, canvas, screen_size)
 
-    def update_state(self):
+    def check_and_update_state(self):
         if self.board.is_full() or not self.player1.has_moves() or not self.player2.has_moves():
             return True
         # If current player hasn't a valid move, go to the next player
-        if not self.board.has_grey():
-            self.board.update_grey(self.turn.disc)
-            if not self.board.has_grey():
+        if not self.board.has_moves():
+            self.board.create_next_moves(self.turn.disc)
+            if not self.board.has_moves():
                 return True
             self.turn = self.player1 if self.turn == self.player2 else self.player2
         return False
 
     def play(self, x, y):
         x, y = self.view.get_row_col(x, y)
-        if self.board.get(x, y) != Disc.GREY:
+        if self.board.get_disc(x, y) != Disc.GREY:
             return
-        self.board.update(x, y, self.turn.disc)
+        self.board.apply_move(x, y, self.turn.disc)
         self.turn.decrease_moves()
         self.turn = self.player1 if self.turn == self.player2 else self.player2
