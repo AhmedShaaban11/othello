@@ -42,13 +42,15 @@ class BoardView:
     def run(self):
         running = True
         while running:
-            self.draw()
             for event in pygame.event.get():
+                self.draw()
+                sleep(0.2)
                 if event.type == pygame.QUIT:
                     running = False
-                if event.type == pygame.MOUSEBUTTONDOWN:
+                elif event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = event.pos
-                    is_end = self.game.play(x, y)
+                    self.game.play(x, y)
+                else:
+                    is_end = self.game.update_state()
                     if is_end:
-                        sleep(0.5)
                         running = False

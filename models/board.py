@@ -50,14 +50,6 @@ class Board:
             return x, y - 1
         elif direction == Direction.RIGHT:
             return x, y + 1
-        elif direction == Direction.UP_LEFT:
-            return x - 1, y - 1
-        elif direction == Direction.UP_RIGHT:
-            return x - 1, y + 1
-        elif direction == Direction.DOWN_LEFT:
-            return x + 1, y - 1
-        elif direction == Direction.DOWN_RIGHT:
-            return x + 1, y + 1
 
     def check_grey_in_one_direction(self, xc, yc, opposite_disc, direction):
         x, y = self.next_position(xc, yc, direction)
@@ -78,10 +70,6 @@ class Board:
             self.check_grey_in_one_direction(xc, yc, opposite_disc, Direction.RIGHT)
             self.check_grey_in_one_direction(xc, yc, opposite_disc, Direction.UP)
             self.check_grey_in_one_direction(xc, yc, opposite_disc, Direction.DOWN)
-            self.check_grey_in_one_direction(xc, yc, opposite_disc, Direction.UP_LEFT)
-            self.check_grey_in_one_direction(xc, yc, opposite_disc, Direction.UP_RIGHT)
-            self.check_grey_in_one_direction(xc, yc, opposite_disc, Direction.DOWN_LEFT)
-            self.check_grey_in_one_direction(xc, yc, opposite_disc, Direction.DOWN_RIGHT)
 
     def update(self, row, col, disc):
         self.expand(row, col, disc)
@@ -94,3 +82,6 @@ class Board:
         black_cnt = len(self.black)
         white_cnt = len(self.white)
         return black_cnt == 0 or white_cnt == 0 or black_cnt + white_cnt == 64
+
+    def has_grey(self):
+        return len(self.grey) != 0
