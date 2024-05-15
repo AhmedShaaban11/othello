@@ -1,12 +1,12 @@
 import pygame
 from enums.disc import Disc
+from time import sleep
 
 
-class View:
-    def __init__(self, board, length=600):
-        pygame.init()
-        pygame.display.set_caption("Othello")
-        self.canvas = pygame.display.set_mode((length, length))
+class BoardView:
+    def __init__(self, board, game, canvas, length=600):
+        self.canvas = canvas
+        self.game = game
         self.board = board
         self.length = length
         self.tile_length = length / 8
@@ -39,3 +39,17 @@ class View:
 
     def get_row_col(self, screen_x, screen_y):
         return int(screen_y // self.tile_length), int(screen_x // self.tile_length)
+
+    def run(self):
+        running = True
+        while running:
+            self.draw()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    x, y = event.pos
+                    is_end = self.game.play(x, y)
+                    if is_end:
+                        sleep(0.5)
+                        running = False

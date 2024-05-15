@@ -2,13 +2,10 @@ import pygame
 
 
 class EndView:
-    def __init__(self, blacks_count, whites_count, width=600, height=600):
-        pygame.init()
-        pygame.display.set_caption("Othello")
+    def __init__(self, blacks_count, whites_count, canvas, width=600, height=600):
         self.width = width
         self.height = height
-        self.canvas = pygame.display.set_mode((width, height))
-        self.canvas.fill("#ffffff")
+        self.canvas = canvas
         self.blacks_count = blacks_count
         self.whites_count = whites_count
 
@@ -18,6 +15,7 @@ class EndView:
         self.canvas.blit(text, ((self.width - text.get_width()) // 2, y))
 
     def run(self):
+        self.canvas.fill("#ffffff")
         if self.blacks_count > self.whites_count:
             heading = "Black Wins with " + str(self.blacks_count) + " discs!"
         elif self.blacks_count < self.whites_count:
@@ -31,4 +29,3 @@ class EndView:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-        pygame.quit()

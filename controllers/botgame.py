@@ -1,20 +1,20 @@
 from enums.difficulty import Difficulty
 from models.player import Player
-from views.boardview import View
+from views.boardview import BoardView
 from models.board import Board, Disc
 from copy import deepcopy
 from time import sleep
 
 
 class BotGame:
-    def __init__(self, difficulty, screen_size=600):
+    def __init__(self, difficulty, canvas, screen_size=600):
         self.board = Board()
         self.depth = self.calculate_depth(difficulty)
         self.screen_size = screen_size
         self.player = Player(Disc.BLACK)
         self.bot = Player(Disc.WHITE)
         self.turn = self.player
-        self.view = View(self.board, screen_size)
+        self.view = BoardView(self.board, self, canvas, screen_size)
 
     def calculate_depth(self, difficulty):
         if difficulty == Difficulty.EASY:

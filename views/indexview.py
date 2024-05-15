@@ -4,12 +4,10 @@ from enums.difficulty import Difficulty
 
 
 class IndexView:
-    def __init__(self, width=600, height=600):
-        pygame.init()
-        pygame.display.set_caption("Othello")
+    def __init__(self, canvas, width=600, height=600):
         self.width = width
         self.height = height
-        self.canvas = pygame.display.set_mode((width, height))
+        self.canvas = canvas
 
     def set_heading(self, heading):
         font = pygame.font.Font(None, 36)
@@ -44,7 +42,6 @@ class IndexView:
                     for btn in btn_list:
                         if btn.collide_point(x, y):
                             return btn.click()
-        pygame.quit()
         return 0
 
     def run_choose_difficulty(self):

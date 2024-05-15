@@ -1,15 +1,15 @@
 from models.board import Board, Disc
 from models.player import Player
-from views.boardview import View
+from views.boardview import BoardView
 
 
 class Game:
-    def __init__(self, screen_size=600):
+    def __init__(self, canvas, screen_size=600):
         self.board = Board()
         self.player1 = Player(Disc.BLACK)
         self.player2 = Player(Disc.WHITE)
         self.turn = self.player1
-        self.view = View(self.board, screen_size)
+        self.view = BoardView(self.board, self, canvas, screen_size)
 
     def play(self, x, y):
         x, y = self.view.get_row_col(x, y)
