@@ -10,16 +10,7 @@ from time import sleep
 class BotGame(Game):
     def __init__(self, difficulty, canvas, screen_size=600):
         super().__init__(canvas, screen_size)
-        self.depth = self.calculate_depth(difficulty)
-
-    def calculate_depth(self, difficulty):
-        if difficulty == Difficulty.EASY:
-            return 1
-        elif difficulty == Difficulty.MEDIUM:
-            return 3
-        elif difficulty == Difficulty.HARD:
-            return 5
-        return 0
+        self.depth = difficulty.depth()
 
     def update_state(self):
         if super().update_state():

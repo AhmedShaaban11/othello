@@ -3,7 +3,6 @@ from controllers.game import Game
 from controllers.botgame import BotGame
 from views.indexview import IndexView
 from views.endview import EndView
-from time import sleep
 
 
 def main():

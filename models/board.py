@@ -30,7 +30,7 @@ class Board:
         li = self.grey.pop((x, y))
         self.clear_grey()
         for row, col, direction in li:
-            row, col = self.next_position(row, col, direction)
+            row, col = direction.next_position(row, col)
             while (row, col) != (x, y):
                 if self.grid[row][col] == Disc.WHITE:
                     self.white.discard((row, col))
@@ -39,24 +39,14 @@ class Board:
                     self.black.discard((row, col))
                     self.white.add((row, col))
                 self.grid[row][col] = disc
-                row, col = self.next_position(row, col, direction)
-
-    def next_position(self, x, y, direction):
-        if direction == Direction.UP:
-            return x - 1, y
-        elif direction == Direction.DOWN:
-            return x + 1, y
-        elif direction == Direction.LEFT:
-            return x, y - 1
-        elif direction == Direction.RIGHT:
-            return x, y + 1
+                row, col = direction.next_position(row, col)
 
     def check_grey_in_one_direction(self, xc, yc, opposite_disc, direction):
-        x, y = self.next_position(xc, yc, direction)
+        x, y = direction.next_position(xc, yc)
         is_opposite_disc_found = False
         while 0 <= x < 8 and 0 <= y < 8 and self.grid[x][y] == opposite_disc:
             is_opposite_disc_found = True
-            x, y = self.next_position(x, y, direction)
+            x, y = direction.next_position(x, y)
         if 0 <= x < 8 and 0 <= y < 8 and (self.grid[x][y] == Disc.EMPTY or self.grid[x][y] == Disc.GREY) and is_opposite_disc_found:
             if not(self.grey.get((x, y))):
                 self.grey[(x, y)] = []

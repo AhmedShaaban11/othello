@@ -27,13 +27,8 @@ class BoardView:
         radius = self.tile_length / 2 - 5
         for row in range(8):
             for col in range(8):
-                center_point = self.center(row, col)
-                if self.board.get(row, col) == Disc.BLACK:
-                    pygame.draw.circle(self.canvas, "#000000", center_point, radius)
-                elif self.board.get(row, col) == Disc.WHITE:
-                    pygame.draw.circle(self.canvas, "#ffffff", center_point, radius)
-                elif self.board.get(row, col) == Disc.GREY:
-                    pygame.draw.circle(self.canvas, "#888888", center_point, radius)
+                disc = self.board.get(row, col)
+                pygame.draw.circle(self.canvas, disc.color(), self.center(row, col), radius)
         pygame.display.update()
 
     def get_row_col(self, screen_x, screen_y):
