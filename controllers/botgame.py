@@ -32,7 +32,7 @@ class BotGame(Game):
     def alpha_beta_root(self, depth, alpha=-100, beta=100):
         max_val = -101
         best_board = None
-        for x, y in self.board.grey.keys():
+        for x, y in self.board.get_moves():
             board = deepcopy(self.board)
             board.apply_move(x, y, self.player2.disc)
             val = self.alpha_beta(board, depth - 1, alpha, beta, False)
@@ -48,7 +48,27 @@ class BotGame(Game):
         if depth == 0:
             return len(root_board.white)
         ret_val = -100 if is_max else 100
-        for x, y in root_board.grey.keys():
+        if not root_board.get_moves():
+            board = deepcopy(root_board)
+            if is_max:
+                board.create_next_moves(self.player1.disc)
+                if not board.get_moves():
+                    return len(board.white)
+                val = self.alpha_beta(board, depth - 1, alpha, beta, not is_max)
+                ret_val = max(ret_val, val)
+                alpha = max(alpha, val)
+                if beta <= alpha:
+                    return ret_val
+            else:
+                board.create_next_moves(self.player2.disc)
+                if not board.get_moves():
+                    return len(board.white)
+                val = self.alpha_beta(board, depth - 1, alpha, beta, not is_max)
+                ret_val = min(ret_val, val)
+                beta = min(beta, val)
+                if beta <= alpha:
+                    return ret_val
+        for x, y in root_board.get_moves():
             board = deepcopy(root_board)
             if is_max:
                 board.apply_move(x, y, self.player2.disc)

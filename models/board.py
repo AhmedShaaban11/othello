@@ -62,6 +62,9 @@ class Board:
         self.expand_move(row, col, disc)
         self.create_next_moves(disc)
 
+    def get_moves(self):
+        return self.grey.keys()
+
     def get_disc(self, row, col):
         return self.grid[row][col]
 
