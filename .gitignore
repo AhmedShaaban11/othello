@@ -4,3 +4,4 @@ venv/
 *.pdf
 *.pyc
 *.txt
+__pycache__/
