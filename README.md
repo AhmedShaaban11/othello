@@ -2,6 +2,8 @@
 
 Othello is a classic strategy board game implemented using Python and Pygame. This project recreates the traditional game experience with engaging graphics and smooth gameplay mechanics.
 
+WATCH THE OVERVIEW [VIDEO](https://drive.google.com/file/d/1ffBjGhZmyssRJrhKJlwWWwscRMxoOps9/view?usp=drive_link)
+
 ## Features
 
 - **Player vs Computer Mode**: Play against ai using alpha-beta pruning algorithm
